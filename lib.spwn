@@ -115,7 +115,7 @@ let lvlstr2arr = (string) {
 }
 let add = (set_arr) {
     for x in set_arr {
-        let b_arg = x[1].map(x => x as @number).join('.') + '.1001' if (x[1].type as @string == "@array") else x[1] as @string + '.1001'
+        let b_arg = x[1].map(x => x as @number).join('.') + '.1001' if (x[1].type as @string == "@array") else (x[1] as @number) as @string + '.1001'
         let s_arg = b_arg if x[1].type as @string == "@array" || x[1].type as @string == "@group" else x[1] as @string
         levelstring += dict[x[0]] as @string + ',' + s_arg + ','
     }
@@ -124,10 +124,31 @@ let add = (set_arr) {
     levelstring = levelstring.join('');
     levelstring += ';'
 }
+let move = (group: @group, settings: @dictionary) {
+	let settings = settings;
+	if !("DURATION" in settings) {
+		settings.DURATION = 0;
+	}
+	if !("EASING" in settings) {
+		settings.EASING = NONE;
+	}
+	if !("EASING_RATE" in settings) {
+		settings.EASING_RATE = 2;
+	}
+    	add({
+        	OBJ_ID: 901,
+        	TARGET: group,
+        	MOVE_X: settings.X * 3,
+        	MOVE_Y: settings.Y * 3,
+        	DURATION: settings.DURATION,
+        	EASING: settings.EASING.id,
+        	EASING_RATE: settings.EASING_RATE
+    	})
+}
 let export = () {
   return lvlstr2arr(levelstring);
 }
 let exportAsString = () {
   return levelstring;
 }
-return { add, export };
+return { export, exportAsString, move, add}
