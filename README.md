@@ -7,6 +7,7 @@ let spwngen = import "lib.spwn";
 spwngen.add({ OBJ_ID: 1, X: 15, Y: 15 }) // Adds our object
 
 let level = spwngen.export() // @array including all objects in level
+let levelstring = spwngen.exportAsString() // returns the original levelstring
 ```
 # But why?
 This was made for the "isolates" concept, which is a concept where you can evaluate code in an isolated enviroment & get the resulting objects from the code. 
