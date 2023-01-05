@@ -127,4 +127,7 @@ let add = (set_arr) {
 let export = () {
   return lvlstr2arr(levelstring);
 }
+let exportAsString = () {
+  return lvlstr2arr(levelstring);
+}
 return { add, export };
