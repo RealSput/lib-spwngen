@@ -4,8 +4,12 @@ A library for SPWN that lets you create levels with code, but lets you return th
 # Usage
 ```rs
 let spwngen = import "lib.spwn";
-spwngen.add({ OBJ_ID: 1, X: 15, Y: 15 }) // Adds our object
-
+spwngen.add({ OBJ_ID: 1, X: 15, Y: 15, GROUPS: 1g }) // Adds our object
+spwngen.add(spwngen.move(1g, {
+  X: 15,
+  Y: 0,
+  DURATION: 0.5
+}));
 let level = spwngen.export() // @array including all objects in level
 let levelstring = spwngen.exportAsString() // returns the original levelstring
 ```
